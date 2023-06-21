@@ -497,6 +497,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
         return StreamOpFlag.SIZED.isKnown(getStreamAndOpFlags()) ? spliterator.getExactSizeIfKnown() : -1;
     }
 
+    // 将传入的sink与中间操作产生的sink组合成链表,然后调用源spliterator方法, 发送Stream元素给sink链处理
     @Override
     final <P_IN, S extends Sink<E_OUT>> S wrapAndCopyInto(S sink, Spliterator<P_IN> spliterator) {
         copyInto(wrapSink(Objects.requireNonNull(sink)), spliterator);
@@ -507,11 +508,17 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
     final <P_IN> void copyInto(Sink<P_IN> wrappedSink, Spliterator<P_IN> spliterator) {
         Objects.requireNonNull(wrappedSink);
 
+        // 非短路操作
         if (!StreamOpFlag.SHORT_CIRCUIT.isKnown(getStreamAndOpFlags())) {
+            // 通知开始 在发送元素之前调用begin() 将元素大小传入sink链表
+            // 经过有状态中间操作时会初始化相应变量
             wrappedSink.begin(spliterator.getExactSizeIfKnown());
+            // 遍历元素 内部调用Sink#accept方法传入每一个元素 同样元素会在sink链表上经过中间操作处理 最后达到终止操作
             spliterator.forEachRemaining(wrappedSink);
+            // 通知结束 做清理工作
             wrappedSink.end();
         }
+        // 短路操作
         else {
             copyIntoWithCancel(wrappedSink, spliterator);
         }

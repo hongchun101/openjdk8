@@ -143,6 +143,7 @@ abstract class ReferencePipeline<P_IN, P_OUT>
     // Stream
 
     // Stateless intermediate operations from Stream
+    // Stream无状态中间操作
 
     @Override
     public Stream<P_OUT> unordered() {
@@ -378,6 +379,7 @@ abstract class ReferencePipeline<P_IN, P_OUT>
     }
 
     // Stateful intermediate operations from Stream
+    // Stream有状态中间操作
 
     @Override
     public final Stream<P_OUT> distinct() {
@@ -412,6 +414,7 @@ abstract class ReferencePipeline<P_IN, P_OUT>
     }
 
     // Terminal operations from Stream
+    // Stream终止操作
 
     @Override
     public void forEach(Consumer<? super P_OUT> action) {

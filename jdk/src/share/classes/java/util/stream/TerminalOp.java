@@ -42,6 +42,7 @@ import java.util.Spliterator;
  * @param <R>    the type of the result
  * @since 1.8
  */
+// stream流终止操作 E_IN -> 输入元素类型 R -> 结果类型
 interface TerminalOp<E_IN, R> {
     /**
      * Gets the shape of the input type of this operation.
@@ -50,6 +51,7 @@ interface TerminalOp<E_IN, R> {
      *
      * @return StreamShape of the input type of this operation
      */
+    // 获取操作的输入元素类型 返回stream类型(Stream IntStream DoubleStream LongStream)
     default StreamShape inputShape() { return StreamShape.REFERENCE; }
 
     /**
@@ -77,6 +79,7 @@ interface TerminalOp<E_IN, R> {
      * @param spliterator the source spliterator
      * @return the result of the evaluation
      */
+    // 并行流 终止操作时调用此方法处理
     default <P_IN> R evaluateParallel(PipelineHelper<E_IN> helper,
                                       Spliterator<P_IN> spliterator) {
         if (Tripwire.ENABLED)
@@ -93,6 +96,7 @@ interface TerminalOp<E_IN, R> {
      * @param spliterator the source spliterator
      * @return the result of the evaluation
      */
+    // 串行流 终止操作时调用此方法处理
     <P_IN> R evaluateSequential(PipelineHelper<E_IN> helper,
                                 Spliterator<P_IN> spliterator);
 }

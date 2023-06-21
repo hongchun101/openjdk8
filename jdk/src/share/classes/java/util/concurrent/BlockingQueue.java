@@ -196,6 +196,7 @@ public interface BlockingQueue<E> extends Queue<E> {
      * @throws IllegalArgumentException if some property of the specified
      *         element prevents it from being added to this queue
      */
+    // 将元素插入队列尾 如果队列满了则抛出异常
     boolean add(E e);
 
     /**
@@ -215,6 +216,7 @@ public interface BlockingQueue<E> extends Queue<E> {
      * @throws IllegalArgumentException if some property of the specified
      *         element prevents it from being added to this queue
      */
+    // 将元素插入队列尾 如果队列满了则返回false
     boolean offer(E e);
 
     /**
@@ -229,6 +231,7 @@ public interface BlockingQueue<E> extends Queue<E> {
      * @throws IllegalArgumentException if some property of the specified
      *         element prevents it from being added to this queue
      */
+    // 将元素插入队列尾 如果必要会等待空间可用
     void put(E e) throws InterruptedException;
 
     /**
@@ -249,6 +252,7 @@ public interface BlockingQueue<E> extends Queue<E> {
      * @throws IllegalArgumentException if some property of the specified
      *         element prevents it from being added to this queue
      */
+    // 将元素插入队列尾 如果必要会在指定时间内等待空间可用
     boolean offer(E e, long timeout, TimeUnit unit)
         throws InterruptedException;
 
@@ -259,6 +263,7 @@ public interface BlockingQueue<E> extends Queue<E> {
      * @return the head of this queue
      * @throws InterruptedException if interrupted while waiting
      */
+    // 检索并移除队列头元素 如果必要会等待直到有元素可用
     E take() throws InterruptedException;
 
     /**
@@ -273,6 +278,7 @@ public interface BlockingQueue<E> extends Queue<E> {
      *         specified waiting time elapses before an element is available
      * @throws InterruptedException if interrupted while waiting
      */
+    // 检索并移除队列头元素 如果必要会在指定时间内等待有元素可用
     E poll(long timeout, TimeUnit unit)
         throws InterruptedException;
 
@@ -289,6 +295,7 @@ public interface BlockingQueue<E> extends Queue<E> {
      *
      * @return the remaining capacity
      */
+    // 返回队列剩余容量
     int remainingCapacity();
 
     /**
@@ -307,6 +314,7 @@ public interface BlockingQueue<E> extends Queue<E> {
      * @throws NullPointerException if the specified element is null
      *         (<a href="../Collection.html#optional-restrictions">optional</a>)
      */
+    // 从队列中移除某个元素
     boolean remove(Object o);
 
     /**

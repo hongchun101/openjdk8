@@ -132,6 +132,7 @@ final class ForEachOps {
      */
     static abstract class ForEachOp<T>
             implements TerminalOp<T, Void>, TerminalSink<T, Void> {
+        // 是否按元素顺序遍历 并行流处理时可能不按元素顺序遍历
         private final boolean ordered;
 
         protected ForEachOp(boolean ordered) {

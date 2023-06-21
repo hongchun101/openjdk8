@@ -159,6 +159,7 @@ public interface Queue<E> extends Collection<E> {
      * @throws IllegalArgumentException if some property of this element
      *         prevents it from being added to this queue
      */
+    // 将元素插入队列尾 如果队列满了则抛出异常
     boolean add(E e);
 
     /**
@@ -178,6 +179,7 @@ public interface Queue<E> extends Collection<E> {
      * @throws IllegalArgumentException if some property of this element
      *         prevents it from being added to this queue
      */
+    // 将元素插入队列尾 如果队列满了则返回false
     boolean offer(E e);
 
     /**
@@ -188,6 +190,7 @@ public interface Queue<E> extends Collection<E> {
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
+    // 检索并移除队列头元素 如果队列为空则抛出异常
     E remove();
 
     /**
@@ -196,6 +199,7 @@ public interface Queue<E> extends Collection<E> {
      *
      * @return the head of this queue, or {@code null} if this queue is empty
      */
+    // 检索并移除队列头元素 如果队列为空则返回null
     E poll();
 
     /**
@@ -206,6 +210,7 @@ public interface Queue<E> extends Collection<E> {
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
+    // 检索但不移除队列头元素 如果队列为空则抛出异常
     E element();
 
     /**
@@ -214,5 +219,6 @@ public interface Queue<E> extends Collection<E> {
      *
      * @return the head of this queue, or {@code null} if this queue is empty
      */
+    // 检索但不移除队列头元素 如果队列为空则返回null
     E peek();
 }

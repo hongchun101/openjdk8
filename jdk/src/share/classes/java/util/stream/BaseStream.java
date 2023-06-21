@@ -71,6 +71,7 @@ public interface BaseStream<T, S extends BaseStream<T, S>>
      *
      * @return the element iterator for this stream
      */
+    // 流代表的集合迭代器
     Iterator<T> iterator();
 
     /**
@@ -81,6 +82,7 @@ public interface BaseStream<T, S extends BaseStream<T, S>>
      *
      * @return the element spliterator for this stream
      */
+    // 返回流元素的spliterator 主要用于终止操作时遍历元素
     Spliterator<T> spliterator();
 
     /**
@@ -90,6 +92,7 @@ public interface BaseStream<T, S extends BaseStream<T, S>>
      *
      * @return {@code true} if this stream would execute in parallel if executed
      */
+    // 是否是并行流
     boolean isParallel();
 
     /**
@@ -102,6 +105,7 @@ public interface BaseStream<T, S extends BaseStream<T, S>>
      *
      * @return a sequential stream
      */
+    // 返回串行流
     S sequential();
 
     /**
@@ -114,6 +118,7 @@ public interface BaseStream<T, S extends BaseStream<T, S>>
      *
      * @return a parallel stream
      */
+    // 返回并行流
     S parallel();
 
     /**
